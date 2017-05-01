@@ -27,8 +27,7 @@ class NotificationController extends Controller
     public function notification(Request $request) {
 
       $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('1PJqZhAv5RWER6iN7UmlY7pAP7Rv3HZtRXaMFgJewfnsx+qCXCIpV/YAI9mlcJ97tvu3cMvy4z/9cQZa0C8RCgey/yDYQP1VDYh2a7m/yCairQwOWnECaXm+zVvtFr3DhXX75BI5hIlZ6DY5QTE/PwdB04t89/1O/w1cDnyilFU=');
-      $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => ' 
-7db8a1a620b8cdd01f1362b1a1733232']);
+      $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '7db8a1a620b8cdd01f1362b1a1733232']);
 
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
       $response = $bot->pushMessage('Ue6225eceb0023ed23483c776e0991539', $textMessageBuilder);
