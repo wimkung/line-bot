@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Exercise;
+use App\ExercisePic;
+use Image;
+use File;
+use Session;
+
+class UserExerciseController extends Controller
+{
+    public function index() {
+
+    	$exercises = Exercise::orderBy('exercise_id', 'desc')->paginate(3);
+
+    	return view('user-exercise-index', compact('exercises'));
+    }
+
+    public function show($id) {
+
+        $exercise_pics = DB::table('exercise')->select('exercise.*','exercise_pic.exercise_pic_file')->join('exercise_pic','exercise.exercise_id','=','exercise_pic.exercise_id')->where('exercise.exercise_id',$id)->get();
+
+        return view('user-exercise-show', ['exercises'=>$exercise_pics]);
+    }
+
+    public function search(Request $request) {
+
+        $exercise_searches = Exercise::where('exercise_title', 'LIKE', '%'.$request->search.'%')->paginate(3);
+
+        return view('user-exercise-search', compact('exercise_searches'));
+    }
+}
