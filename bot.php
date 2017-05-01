@@ -4,6 +4,17 @@ $access_token = '1PJqZhAv5RWER6iN7UmlY7pAP7Rv3HZtRXaMFgJewfnsx+qCXCIpV/YAI9mlcJ9
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
+
+$url2 = 'https://api.line.me/v1/oauth/verify';
+$headers = array('Authorization: Bearer ' . $access_token);
+$ch = curl_init($url2);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+echo $result;
+
 $events = json_decode($content, true);
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
@@ -44,4 +55,5 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
+
 echo "OK";
