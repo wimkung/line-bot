@@ -31,7 +31,7 @@ class NotificationController extends Controller
 7db8a1a620b8cdd01f1362b1a1733232']);
 
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-      $response = $bot->pushMessage('ue6225eceb0023ed23483c776e0991539', $textMessageBuilder);
+      $response = $bot->pushMessage('Ue6225eceb0023ed23483c776e0991539', $textMessageBuilder);
 
       echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
