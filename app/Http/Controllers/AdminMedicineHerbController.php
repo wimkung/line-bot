@@ -43,13 +43,6 @@ class AdminMedicineHerbController extends Controller
             $count = count($request->file('images'));
                 if ($count>25) {
                     Session::flash('flash_message','อัพโหลดรูปได้ไม่เกิน 25 รูปเท่านั้น!!!');
-
-                    $medicine_pic = new MedicineHerbPic();
-                    $medicine_pic->medicine_id = $medicine_id->medicine_id;
-
-                    $medicine_pic->medicine_pic_file = 'nopic.png';
-                    $medicine_pic->save();
-
                     return redirect()->back();
                 }
 
@@ -68,17 +61,7 @@ class AdminMedicineHerbController extends Controller
 
                 $medicine_pic->save();
             } 
-
-        } else {
-            $medicine_pic = new MedicineHerbPic();
-            $medicine_pic->medicine_id = $medicine_id->medicine_id;
-
-            $medicine_pic->medicine_pic_file = 'nopic.png';
-
-            $medicine_pic->save();
-        }
-        
-    
+        } 
         Session::flash('flash_message', 'ข้อมูลถูกเพิ่มแล้ว!');
 
         return redirect()->back();
@@ -86,9 +69,11 @@ class AdminMedicineHerbController extends Controller
 
     public function show($id) {
 
+        $medicine_text = DB::table('medicine_herb')->select('medicine_herb.*')->where('medicine_id',$id)->get();
+
         $medicine_pics = DB::table('medicine_herb')->select('medicine_herb.*','medicine_pic.medicine_pic_file')->join('medicine_pic','medicine_herb.medicine_id','=','medicine_pic.medicine_id')->where('medicine_herb.medicine_id',$id)->get();
 
-        return view('medicine.show', ['medicines'=>$medicine_pics]);
+        return view('medicine.show', compact('medicine_text'), ['medicines'=>$medicine_pics]);
     }
 
     public function edit($id) {
@@ -119,8 +104,20 @@ class AdminMedicineHerbController extends Controller
      */
 
     public function destroy($id) {
-        // Health::find($id)->delete();
-        MedicineHerb::destroy($id);
+        
+        $medicines = MedicineHerb::find($id);
+
+        $medicine_pics = DB::table('medicine_pic')->get()->where('medicine_id',$id);
+
+        foreach ($medicine_pics as $medicine_pic) {
+
+            File::delete(public_path() . '/images/resize_medicine/' .$medicine_pic->medicine_pic_file);
+        }
+        
+        $medicines->delete();
         return back();
+
+        // MedicineHerb::find($id)->delete();
+        // MedicineHerb::destroy($id);
     }
 }

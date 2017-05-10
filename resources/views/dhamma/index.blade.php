@@ -121,9 +121,7 @@
                     </div>
 
                     <div class="col-md-5">
-                        <h4>
-                        &nbsp;&nbsp;{{$dhamma->dhamma_title}}
-                        </span></h4>
+                        <h4>{{$dhamma->dhamma_title}}</h4>
                     </div>
 
                     <div class="col-md-1 col-md-offset-1">

@@ -97,6 +97,11 @@
 
                     <li>
                         <a href="{{ url('member/evaluation') }}"><i class="glyphicon glyphicon-list-alt fa-2x"></i><font size="5">แบบประเมินสุขภาพ</font></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('member/history') }}"><font size="4"> ประวัติการทำแบบประเมิน</font></a>
+                                </li>
+                            </ul>
                     </li>
 
                     <li>
@@ -153,7 +158,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="form-group">
                             <p><B>{!! Form::label('images', 'รูปภาพ') !!}
-                            {!! Form::file('images[]', array('multiple'=>true)) !!}
+                            {!! Form::file('images[]', array('multiple'=>true, 'accept' =>'.png, .jpg, .jpeg')) !!}
                         </div>
                     </div>
 

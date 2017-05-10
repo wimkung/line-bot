@@ -155,7 +155,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="form-group">
                             {!! Form::label('images', 'รูปภาพ') !!}
-                            {!! Form::file('images[]', array('multiple'=>true)) !!}
+                            {!! Form::file('images[]', array('multiple'=>true, 'accept' =>'.png, .jpg, .jpeg')) !!}
                         </div>
                     </div>
 

@@ -97,14 +97,15 @@
 
                     <li>
                         <a class="active-menu" href="{{ url('member/evaluation') }}"><i class="glyphicon glyphicon-list-alt fa-2x"></i><font size="5">แบบประเมินสุขภาพ</font></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('member/history') }}"><font size="4"> ประวัติการทำแบบประเมิน</font></a>
+                                </li>
+                            </ul>
                     </li>
 
                     <li>
                         <a href="form.html"><i class="fa fa-bell fa-2x"></i><font size="5">การแจ้งเตือน</font></a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('admin.login.submit') }}"><i class="fa fa-user-circle-o fa-2x"></i><font size="5">ผู้ดูแลเว็บไซต์</font></a>
                     </li>
                 </ul>
             </div>

@@ -129,10 +129,11 @@
                     <div style="background: #537ba3; padding: 30px 30px 0px 30px; border:2px solid #f3f3f3;">
                         <div class="row">
                             <div class="col-md-5 col-md-offset-1">
-                                <img src="{{ asset('assets/img/line-group.jpg') }}" width="200" alt="">    
+                                <!-- <img src="{{ asset('assets/img/line-friend.jpg') }}" width="200" alt=""> --> 
+                                <img src="http://qr-official.line.me/L/dgAi5St0qN.png" width="200">   
                                 <br><br><br>   
                             </div> 
-                                <font color="#fff"><h3>&nbsp;&nbsp;&nbsp;&nbsp;เข้าร่วมกลุ่ม LINE ด้วยคิวอาร์โค้ด</h3
+                                <font color="#fff"><h3>&nbsp;&nbsp;&nbsp;&nbsp;เพิ่มเพื่อน LINE ด้วยคิวอาร์โค้ด</h3
                                 >
                                 <br>
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เริ่มแอพ LINE แล้วสแกนคิวอาร์โค้ด 
@@ -148,28 +149,27 @@
                     <br>
                     <div class="col-md-8 col-md-offset-2">
                         <div class="form-group">
+                            <div class="input-group-lg">
+                            <p><B>{!! Form::label('ไอดีของคุณ') !!}
+                            {!! Form::text('your_id', null, array('class'=>'form-control')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <br>
                             <p><B>{!! Form::label('ข้อความที่ต้องการส่ง') !!}
                             <div style="border: 1px solid #ccc;">
-                            {!! Form::textarea('notification_mess', null, array('class'=>'form-control','row'=>'10','placeholder'=>'ข้อความ')) !!}
+                            {!! Form::textarea('notification_mess', null, array('required', 'class'=>'form-control','row'=>'10','placeholder'=>'ข้อความ')) !!}
                             </div>
                         </div>
                     </div>
                     <br><br>
-                     <div class="col-md-8 col-md-offset-2">
-                        <div class="form-group">
-                            <div class="input-group-lg">
-                            <p><B>{!! Form::label('ผู้ที่ต้องการส่งถึง') !!}
-                            {!! Form::text('send_to', null, array('required')) !!}
-                            </div>
-                        </div>
-                    </div>
-                    
+
                     <div class="col-md-8 col-md-offset-2">
                        <div class="form-group">
                             <div class="input-group-lg">
                             <p><B>{!! Form::label('เวลาที่ต้องทำสำหรับการแจ้งเตือน') !!}
-                            {!! Form::time('notification_time', null, array('class'=>'form-control','placeholder'=>'ชั่วโมง')) !!}
+                            {!! Form::time('notification_time', null, array('required', 'class'=>'form-control','placeholder'=>'ชั่วโมง')) !!}
                             </div>
                         </div>
                     </div>

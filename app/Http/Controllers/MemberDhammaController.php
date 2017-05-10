@@ -25,9 +25,11 @@ class MemberDhammaController extends Controller
 
     public function show($id) {
 
+        $dhamma_text = DB::table('dhamma_article')->select('dhamma_article.*')->where('dhamma_id',$id)->get();
+
         $dhamma_pics = DB::table('dhamma_article')->select('dhamma_article.*','dhamma_pic.dhamma_pic_file')->join('dhamma_pic','dhamma_article.dhamma_id','=','dhamma_pic.dhamma_id')->where('dhamma_article.dhamma_id',$id)->get();
 
-        return view('member-dhamma-show', ['dhammas'=>$dhamma_pics]);
+        return view('member-dhamma-show', compact('dhamma_text'), ['dhammas'=>$dhamma_pics]);
     }
 
     public function search(Request $request) {

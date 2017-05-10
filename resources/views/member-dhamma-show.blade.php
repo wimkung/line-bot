@@ -97,6 +97,11 @@
 
                     <li>
                         <a href="{{ url('member/evaluation') }}"><i class="glyphicon glyphicon-list-alt fa-2x"></i><font size="5">แบบประเมินสุขภาพ</font></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('member/history') }}"><font size="4"> ประวัติการทำแบบประเมิน</font></a>
+                                </li>
+                            </ul>
                     </li>
 
                     <li>
@@ -109,7 +114,7 @@
         <!-- /. nav side-->
         <div id="page-wrapper" >
             <div id="page-inner">
-                @foreach ($dhammas as $dhamma)
+                @foreach ($dhamma_text as $dhamma)
                 <div class="row">
                     @if($loop->first)
                     <div class="col-md-6">
@@ -167,11 +172,11 @@
                 </div>
 
                 <div class="row">
-                    @foreach ($dhammas as $dhamma)
+                    @foreach ($dhamma_text as $dhamma)
                         @if ($loop->first) 
                             <div class="col-md-8 col-md-offset-2">
                                 <br>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <p>
                                 <?php $myStringWithANewLine ="$dhamma->dhamma_inform";
                                     $newString = str_replace("\r\n","<br />",$myStringWithANewLine);
                                     $newString = str_replace("\n\r","<br />",$newString);

@@ -44,13 +44,6 @@ class AdminExerciseController extends Controller
             $count = count($request->file('images'));
                 if ($count>25) {
                     Session::flash('flash_message','อัพโหลดรูปได้ไม่เกิน 25 รูปเท่านั้น!!!');
-
-                    $exercise_pic = new ExercisePic();
-                    $exercise_pic->exercise_id = $exercise_id->exercise_id;
-
-                    $exercise_pic->exercise_pic_file = 'nopic.png';
-                    $exercise_pic->save();
-
                     return redirect()->back();
                 }
 
@@ -70,16 +63,8 @@ class AdminExerciseController extends Controller
                 $exercise_pic->save();
             } 
 
-        } else {
-            $exercise_pic = new ExercisePic();
-            $exercise_pic->exercise_id = $exercise_id->exercise_id;
-
-            $exercise_pic->exercise_pic_file = 'nopic.png';
-
-            $exercise_pic->save();
-        }
+        } 
         
-    
         Session::flash('flash_message', 'ข้อมูลถูกเพิ่มแล้ว!');
 
         return redirect()->back();
@@ -87,9 +72,11 @@ class AdminExerciseController extends Controller
 
     public function show($id) {
 
+        $exercise_text = DB::table('exercise')->select('exercise.*')->where('exercise_id',$id)->get();
+
         $exercise_pics = DB::table('exercise')->select('exercise.*','exercise_pic.exercise_pic_file')->join('exercise_pic','exercise.exercise_id','=','exercise_pic.exercise_id')->where('exercise.exercise_id',$id)->get();
 
-        return view('exercise.show', ['exercises'=>$exercise_pics]);
+        return view('exercise.show', compact('exercise_text'), ['exercises'=>$exercise_pics]);
     }
 
     public function edit($id) {
@@ -120,8 +107,21 @@ class AdminExerciseController extends Controller
      */
 
     public function destroy($id) {
-        // Health::find($id)->delete();
-        Exercise::destroy($id);
+
+        $exercises = Exercise::find($id);
+
+        $exercise_pics = DB::table('exercise_pic')->get()->where('exercise_id',$id);
+
+        foreach ($exercise_pics as $exercise_pic) {
+
+            File::delete(public_path() . '/images/resize_exercise/' .$exercise_pic->exercise_pic_file);
+        }
+        
+        $exercises->delete();
         return back();
+
+        // Health::find($id)->delete();
+        // Exercise::destroy($id);
+        // return back();
     }
 }

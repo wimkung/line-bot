@@ -101,7 +101,7 @@
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                @foreach ($dhammas as $dhamma)
+                @foreach ($dhamma_text as $dhamma)
                     @if($loop->first)
                     <div class="col-md-8">
                         <br>
@@ -159,11 +159,11 @@
                 </div>
 
                 <div class="row">
-                    @foreach ($dhammas as $dhamma)
+                    @foreach ($dhamma_text as $dhamma)
                         @if ($loop->first) 
                             <div class="col-md-8 col-md-offset-2">
                                 <br>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <p>
                                 <?php $myStringWithANewLine = "$dhamma->dhamma_inform";
                                     $newString = str_replace("\r\n","<br />",$myStringWithANewLine);
                                     $newString = str_replace("\n\r","<br />",$newString);

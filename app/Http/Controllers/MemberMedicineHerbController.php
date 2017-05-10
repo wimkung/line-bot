@@ -25,9 +25,11 @@ class MemberMedicineHerbController extends Controller
 
     public function show($id) {
 
+       $medicine_text = DB::table('medicine_herb')->select('medicine_herb.*')->where('medicine_id',$id)->get();
+
        $medicine_pics = DB::table('medicine_herb')->select('medicine_herb.*','medicine_pic.medicine_pic_file')->join('medicine_pic','medicine_herb.medicine_id','=','medicine_pic.medicine_id')->where('medicine_herb.medicine_id',$id)->get();
 
-        return view('member-medicine-show', ['medicines'=>$medicine_pics]);
+        return view('member-medicine-show', compact('medicine_text'), ['medicines'=>$medicine_pics]);
     }
 
     public function search(Request $request) {

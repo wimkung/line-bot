@@ -121,9 +121,7 @@
                     </div>
 
                     <div class="col-md-5">
-                        <h4>
-                        &nbsp;&nbsp;{{$medicine->medicine_title}}
-                        </span></h4>
+                        <h4>{{$medicine->medicine_title}}</h4>
                     </div>
 
                     <div class="col-md-1 col-md-offset-1">

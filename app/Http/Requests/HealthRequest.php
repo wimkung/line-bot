@@ -26,16 +26,17 @@ class HealthRequest extends FormRequest
         return [
             'health_title' => 'required',
             'health_inform' => 'required',
-            // 'health_id' => 'required',
-            'health_pic_file' => 'mimes:jpeg,jpg,png',
+            // 'images' => 'mimes:jpg,jpeg,png',
+            // 'images' => 'images|mimes:jpg,png',,
+            // 'images' => 'required',
+
         ];
     }
     public function messages() {
         return [
             'health_title.required' => 'กรุณากรอกชื่อบทความ',
             'health_inform.required' => 'กรุณากรอกรายละเอียดบทความ',
-            // 'health_pic_id.required' => 'กรุณาเลือกหมวดหนังสือ',
-            'images.mimes' => 'กรุณาเลือกไฟล์ภาพนามสกุล jpeg,jpg,png',
+            // 'images.required' => 'กรุณาเลือกไฟล์ภาพนามสกุล jpeg,jpg,png',
         ];
     }
 }

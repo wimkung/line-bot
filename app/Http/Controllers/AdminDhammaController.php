@@ -45,13 +45,6 @@ class AdminDhammaController extends Controller
             $count = count($request->file('images'));
                 if ($count>25) {
                     Session::flash('flash_message','อัพโหลดรูปได้ไม่เกิน 25 รูปเท่านั้น!!!');
-
-                    $dhamma_pic = new DhammaPic();
-                    $dhamma_pic->dhamma_id = $dhamma_id->dhamma_id;
-
-                    $dhamma_pic->dhamma_pic_file = 'nopic.png';
-                    $dhamma_pic->save();
-
                     return redirect()->back();
                 }
 
@@ -71,16 +64,7 @@ class AdminDhammaController extends Controller
                 $dhamma_pic->save();
             } 
 
-        } else {
-            $dhamma_pic = new DhammaPic();
-            $dhamma_pic->dhamma_id = $dhamma_id->dhamma_id;
-
-            $dhamma_pic->dhamma_pic_file = 'nopic.png';
-
-            $dhamma_pic->save();
-        }
-        
-    
+        } 
         Session::flash('flash_message', 'ข้อมูลถูกเพิ่มแล้ว!');
 
         return redirect()->back();
@@ -89,9 +73,11 @@ class AdminDhammaController extends Controller
 
     public function show($id) {
 
+        $dhamma_text = DB::table('dhamma_article')->select('dhamma_article.*')->where('dhamma_id',$id)->get();
+
         $dhamma_pics = DB::table('dhamma_article')->select('dhamma_article.*','dhamma_pic.dhamma_pic_file')->join('dhamma_pic','dhamma_article.dhamma_id','=','dhamma_pic.dhamma_id')->where('dhamma_article.dhamma_id',$id)->get();
 
-        return view('dhamma.show', ['dhammas'=>$dhamma_pics]);
+        return view('dhamma.show', compact('dhamma_text'), ['dhammas'=>$dhamma_pics]);
     }
 
     public function edit($id) {
@@ -122,8 +108,21 @@ class AdminDhammaController extends Controller
      */
 
     public function destroy($id) {
-        // Health::find($id)->delete();
-        Dhamma::destroy($id);
+
+        $dhammas = Dhamma::find($id);
+
+        $dhamma_pics = DB::table('dhamma_pic')->get()->where('dhamma_id',$id);
+
+        foreach ($dhamma_pics as $dhamma_pic) {
+
+            File::delete(public_path() . '/images/resize_dhamma/' .$dhamma_pic->dhamma_pic_file);
+        }
+        
+        $dhammas->delete();
         return back();
+
+        // Health::find($id)->delete();
+        // Dhamma::destroy($id);
+        // return back();
     }
 }

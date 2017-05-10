@@ -21,9 +21,11 @@ class UserExerciseController extends Controller
 
     public function show($id) {
 
+        $exercise_text = DB::table('exercise')->select('exercise.*')->where('exercise_id',$id)->get();
+
         $exercise_pics = DB::table('exercise')->select('exercise.*','exercise_pic.exercise_pic_file')->join('exercise_pic','exercise.exercise_id','=','exercise_pic.exercise_id')->where('exercise.exercise_id',$id)->get();
 
-        return view('user-exercise-show', ['exercises'=>$exercise_pics]);
+        return view('user-exercise-show', compact('exercise_text'), ['exercises'=>$exercise_pics]);
     }
 
     public function search(Request $request) {

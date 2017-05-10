@@ -112,15 +112,16 @@
 
                 <div class="row">
                     @foreach($shares as $share)
+                    <div class="col-md-1">
+                        <h3>&nbsp;&nbsp;&nbsp;<span class="fa fa-share-alt" style="color:#00bfff"></span><h3>
+                    </div>
+
                     <div class="col-md-5">
-                        <h4>&nbsp;&nbsp;&nbsp;<span class="fa fa-share-alt" style="color:#00bfff">
-                        <font color="#000">&nbsp;<B>{{$share->share_title}}</B></font>
-                        </span></h4>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time" style="color:#00bfff"></span> แบ่งปันเมื่อ {{ $share->created_at }}</p>
+                        <h4><font color="#000">&nbsp;<B>{{$share->share_title}}</B></font></h4>
+                        <p>&nbsp;<span class="glyphicon glyphicon-time" style="color:#00bfff"></span> แบ่งปันเมื่อ {{ $share->created_at }}</p>
                     </div>
                     
-
-                    <div class="col-md-1 col-md-offset-4">
+                    <div class="col-md-1 col-md-offset-2">
                         <br><br>
                         <a href="{{url ('admin/share/'. $share->share_id)}}" class="btn btn-primary"><span class="fa fa-book"> อ่านต่อ</span></a>
                     </div>

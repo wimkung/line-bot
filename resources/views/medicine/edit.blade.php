@@ -156,6 +156,12 @@
                     </div>
 
                     <div class="col-md-8 col-md-offset-2">
+                        <br>
+                        <a href="{{url ('admin/medicine/pic/'. $medicine->medicine_id)}}" class="btn btn-default"><span class="fa fa-pencil"> แก้ไขรูปภาพ</span></a>
+                        <p>*หากไม่ต้องการแก้ไขรูปภาพ ให้ข้ามขั้นตอนนี้ได้เลย</p>
+                    </div>
+
+                    <div class="col-md-8 col-md-offset-2">
                         <div class="form-group">
                             <!-- {!! Form::label('images', 'รูปภาพ') !!}
                             {!! Form::file('images[]', array('multiple'=>true)) !!} -->

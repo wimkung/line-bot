@@ -47,14 +47,8 @@ class AdminHealthController extends Controller
 
             $count = count($request->file('images'));
                 if ($count>25) {
+
                     Session::flash('flash_message','อัพโหลดรูปได้ไม่เกิน 25 รูปเท่านั้น!!!');
-
-                    $health_pic = new HealthPic();
-                    $health_pic->health_id = $health_id->health_id;
-
-                    $health_pic->health_pic_file = 'nopic.png';
-                    $health_pic->save();
-                    
                     return redirect()->back();
                 } 
 
@@ -73,27 +67,19 @@ class AdminHealthController extends Controller
 
                 $health_pic->save(); 
             } 
-         
-        } else {
-            $health_pic = new HealthPic();
-            $health_pic->health_id = $health_id->health_id;
+        } 
 
-            $health_pic->health_pic_file = 'nopic.png';
-
-            $health_pic->save();
-        }
-        
-    
         Session::flash('flash_message', 'ข้อมูลถูกเพิ่มแล้ว!');
-
         return redirect()->back();
     }
 
     public function show($id) {
 
+        $health_text = DB::table('health_article')->select('health_article.*')->where('health_id',$id)->get();
+
         $health_pics = DB::table('health_article')->select('health_article.*','health_pic.health_pic_file')->join('health_pic','health_article.health_id','=','health_pic.health_id')->where('health_article.health_id',$id)->get();
 
-        return view('health.show', ['healths'=>$health_pics]);
+        return view('health.show', compact('health_text'), ['healths'=>$health_pics]);
     }
 
     public function edit($id)
@@ -111,7 +97,7 @@ class AdminHealthController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(HealthRequest $request, $id)
     {
         $health = Health::find($id);
         $health->update(Request::all());
@@ -129,9 +115,23 @@ class AdminHealthController extends Controller
      */
 
     public function destroy($id) {
-        // Health::find($id)->delete();
-        Health::destroy($id);
+        
+        $healths = Health::find($id);
+
+        $health_pics = DB::table('health_pic')->get()->where('health_id',$id);
+
+        foreach ($health_pics as $health_pic) {
+
+            File::delete(public_path() . '/images/resize/' .$health_pic->health_pic_file);
+        }
+        
+        $healths->delete();
         return back();
+
+        // Health::find($id)->delete();
+        // return back();
+        // Health::destroy($id);
+        // return back();
     }
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Share; 
 use Illuminate\Support\Facades\DB;
+use File;
 
 class AdminShareController extends Controller
 {
@@ -34,7 +35,20 @@ class AdminShareController extends Controller
     }
 
     public function destroy($id) {
-       	Share::destroy($id);
+
+        $shares = Share::find($id);
+
+        $share_pics = DB::table('share_pic')->get()->where('share_id',$id);
+
+        foreach ($share_pics as $share_pic) {
+
+            File::delete(public_path() . '/images/resize_share/' .$share_pic->share_pic_file);
+        }
+        
+        $shares->delete();
         return back();
+
+       	// Share::destroy($id);
+        // return back();
     }
 }

@@ -43,13 +43,6 @@ class AdminFoodController extends Controller
             $count = count($request->file('images'));
                 if ($count>25) {
                     Session::flash('flash_message','อัพโหลดรูปได้ไม่เกิน 25 รูปเท่านั้น!!!');
-
-                    $food_pic = new FoodPic();
-                    $food_pic->food_id = $food_id->food_id;
-
-                    $food_pic->food_pic_file = 'nopic.png';
-                    $food_pic->save();
-
                     return redirect()->back();
                 }
 
@@ -69,14 +62,7 @@ class AdminFoodController extends Controller
                 $food_pic->save();
             } 
 
-        } else {
-            $food_pic = new FoodPic();
-            $food_pic->food_id = $food_id->food_id;
-
-            $food_pic->food_pic_file = 'nopic.png';
-
-            $food_pic->save();
-        }
+        } 
         
         Session::flash('flash_message', 'ข้อมูลถูกเพิ่มแล้ว!');
 
@@ -85,9 +71,11 @@ class AdminFoodController extends Controller
 
     public function show($id) {
 
+        $food_text = DB::table('food')->select('food.*')->where('food_id',$id)->get();
+
         $food_pics = DB::table('food')->select('food.*','food_pic.food_pic_file')->join('food_pic','food.food_id','=','food_pic.food_id')->where('food.food_id',$id)->get();
 
-        return view('food.show', ['foods'=>$food_pics]);
+        return view('food.show', compact('food_text'), ['foods'=>$food_pics]);
     }
 
     public function edit($id) {
@@ -118,8 +106,21 @@ class AdminFoodController extends Controller
      */
 
     public function destroy($id) {
-        // Health::find($id)->delete();
-        Food::destroy($id);
+
+        $foods = Food::find($id);
+
+        $food_pics = DB::table('food_pic')->get()->where('food_id',$id);
+
+        foreach ($food_pics as $food_pic) {
+
+            File::delete(public_path() . '/images/resize_food/' .$food_pic->food_pic_file);
+        }
+        
+        $foods->delete();
         return back();
+
+        // Health::find($id)->delete();
+        // Food::destroy($id);
+        // return back();
     }
 }

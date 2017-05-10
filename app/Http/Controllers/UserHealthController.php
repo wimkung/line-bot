@@ -27,9 +27,11 @@ class UserHealthController extends Controller
 
     public function show($id) {
 
+        $health_text = DB::table('health_article')->select('health_article.*')->where('health_id',$id)->get();
+
         $health_pics = DB::table('health_article')->select('health_article.*','health_pic.health_pic_file')->join('health_pic','health_article.health_id','=','health_pic.health_id')->where('health_article.health_id',$id)->get();
 
-        return view('user-health-show', ['healths'=>$health_pics]);
+        return view('user-health-show', compact('health_text'), ['healths'=>$health_pics]);
     }
 
     public function search(Request $request) {

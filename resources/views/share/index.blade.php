@@ -97,6 +97,11 @@
 
                     <li>
                         <a href="{{ url('member/evaluation') }}"><i class="glyphicon glyphicon-list-alt fa-2x"></i><font size="5">แบบประเมินสุขภาพ</font></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('member/history') }}"><font size="4"> ประวัติการทำแบบประเมิน</font></a>
+                                </li>
+                            </ul>
                     </li>
 
                     <li>
@@ -126,16 +131,17 @@
 
                 <div class="row">
                     @foreach($shares as $share)
+                    <div class="col-md-1">
+                        <br>
+                        <h5>&nbsp;&nbsp;&nbsp;<span class="fa fa-share-alt fa-2x" style="color:#00bfff"></span></h5>
+                    </div>
                     <div class="col-md-6">
+                        <h3><font color="#000">&nbsp;<B>{{$share->share_title}}</B></font></h3>
                         <br>
-                        <h5>&nbsp;&nbsp;&nbsp;<span class="fa fa-share-alt fa-2x" style="color:#00bfff">
-                        <font color="#000">&nbsp;<B>{{$share->share_title}}</B></font>
-                        </span></h5>
-                        <br>
-                        <p>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time" style="color:#00bfff"></span> แบ่งปันเมื่อ {{ $share->created_at }}</p>
+
+                        <p>&nbsp;<span class="glyphicon glyphicon-time" style="color:#00bfff"></span> แบ่งปันเมื่อ {{ $share->created_at }}</p>
                     </div>
                     
-
                     <div class="col-md-3 col-md-offset-2">
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;

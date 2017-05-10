@@ -25,9 +25,11 @@ class MemberFoodController extends Controller
 
     public function show($id) {
 
+        $food_text = DB::table('food')->select('food.*')->where('food_id',$id)->get();
+
         $food_pics = DB::table('food')->select('food.*','food_pic.food_pic_file')->join('food_pic','food.food_id','=','food_pic.food_id')->where('food.food_id',$id)->get();
 
-        return view('member-food-show', ['foods'=>$food_pics]);
+        return view('member-food-show', compact('food_text'), ['foods'=>$food_pics]);
     }
 
     public function search(Request $request) {

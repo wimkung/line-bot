@@ -63,10 +63,30 @@ Route::prefix('admin')->group(function() {
 	Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::resource('/health', 'AdminHealthController');
 	// Route::get('/health/destroy/{id}', 'AdminHealthController@destroy');
+	Route::get('/health/pic/{id}', 'AdminHealthPicController@showpic');
+	Route::PUT('/health/editpic/{id}', 'AdminHealthPicController@update');
+	Route::delete('/health/pic/destroy/{id}', 'AdminHealthPicController@destroy');
+
 	Route::resource('/food', 'AdminFoodController');
+	Route::get('/food/pic/{id}', 'AdminFoodPicController@showpic');
+	Route::PUT('/food/editpic/{id}', 'AdminFoodPicController@update');
+	Route::delete('/food/pic/destroy/{id}', 'AdminFoodPicController@destroy');
+
 	Route::resource('/exercise', 'AdminExerciseController');
+	Route::get('/exercise/pic/{id}', 'AdminExercisePicController@showpic');
+	Route::PUT('/exercise/editpic/{id}', 'AdminExercisePicController@update');
+	Route::delete('/exercise/pic/destroy/{id}', 'AdminExercisePicController@destroy');
+
 	Route::resource('/medicine', 'AdminMedicineHerbController');
+	Route::get('/medicine/pic/{id}', 'AdminMedicineHerbPicController@showpic');
+	Route::PUT('/medicine/editpic/{id}', 'AdminMedicineHerbPicController@update');
+	Route::delete('/medicine/pic/destroy/{id}', 'AdminMedicineHerbPicController@destroy');
+
 	Route::resource('/dhamma', 'AdminDhammaController');
+	Route::get('/dhamma/pic/{id}', 'AdminDhammaPicController@showpic');
+	Route::PUT('/dhamma/editpic/{id}', 'AdminDhammaPicController@update');
+	Route::delete('/dhamma/pic/destroy/{id}', 'AdminDhammaPicController@destroy');
+
 	Route::get('/share', 'AdminShareController@index');
 	Route::get('/share/{id}', 'AdminShareController@show');
 	Route::delete('/share/destroy/{id}', 'AdminShareController@destroy');
@@ -115,6 +135,8 @@ Route::prefix('member')->group(function() {
 
 	Route::get('/preDMHT/form', 'PreDMHTFormController@index');
 	Route::post('/preDMHT/form', 'PreDMHTFormController@calculate');
+
+	Route::get('/history', 'HistoryFormController@history');
 
 	Route::get('/notification', 'NotificationController@index');
 	Route::post('/notification', 'NotificationController@notification');

@@ -58,7 +58,8 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li class="text-center">
-                        <!-- <img src="assets/img/find_user.png" class="user-image img-responsive"/> -->
+                        <h3><font style="color: #fff;">การดูแลสุขภาพผู้สูงอายุ</font></h3>
+                        <img src="{{ asset('assets/img/logo.png') }}" class="user-image img-responsive"/>
                     </li>
 
                     <li>
@@ -94,8 +95,13 @@
                         <a href="{{ url('member/share') }}"><i class="fa fa-share-alt fa-2x"></i><font size="5">แบ่งปันประสบการณ์</font></a>
                     </li>
 
-                    <li>
+                     <li>
                         <a class="active-menu" href="{{ url('member/evaluation') }}"><i class="glyphicon glyphicon-list-alt fa-2x"></i><font size="5">แบบประเมินสุขภาพ</font></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('member/history') }}"><font size="4"> ประวัติการทำแบบประเมิน</font></a>
+                                </li>
+                            </ul>
                     </li>
 
                     <li>

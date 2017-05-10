@@ -137,7 +137,7 @@
 
                     <!-- {!! Form::open(['url' => 'admin/health', 'method' => 'post', 'files' => 'true']) !!} -->
 
-                    {!! Form::model($health, ['method' => 'PUT', 'action'=>['AdminHealthController@update', $health->health_id]]) !!}
+                    {!! Form::model($health, ['method' => 'PUT', 'files' => 'true', 'action'=>['AdminHealthController@update', $health->health_id]]) !!}
 
                     <br>
                     <div class="col-md-8 col-md-offset-2">
@@ -156,6 +156,12 @@
                     </div>
 
                     <div class="col-md-8 col-md-offset-2">
+                        <br>
+                        <a href="{{url ('admin/health/pic/'. $health->health_id)}}" class="btn btn-default"><span class="fa fa-pencil"> แก้ไขรูปภาพ</span></a>
+                        <p>*หากไม่ต้องการแก้ไขรูปภาพ ให้ข้ามขั้นตอนนี้ได้เลย</p>
+                    </div>
+
+                    <div class="col-md-8 col-md-offset-2">
                         <div class="form-group">
                             <!-- {!! Form::label('images', 'รูปภาพ') !!}
                             {!! Form::file('images[]', array('multiple'=>true)) !!} -->
@@ -167,9 +173,7 @@
                             {!! Form::submit('อัพเดทข้อมูล', array('class'=>'btn btn-primary')) !!}
                         </div>
                     </div>
-
-                    {!! Form::close() !!}
-
+                  {!! Form::close() !!}
                 </div>
             </div> <!-- /. PAGE INNER  -->
         </div> <!-- /. PAGE WRAPPER  -->

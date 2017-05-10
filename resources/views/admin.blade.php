@@ -37,7 +37,7 @@
                     padding: 1px 50px 5px 50px;
                     float: right;
                     font-size: 16px;">
-                    <i class="fa fa-user-circle"></i> {{ Auth::user()->name }} &nbsp;
+                    <i class="fa fa-user-circle-o"></i> {{ Auth::user()->name }} &nbsp;
                         <a href="{{ url('/logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"><button class="btn btn-default square-btn-adjust"><B>ออกจากระบบ</B></button>

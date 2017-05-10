@@ -98,13 +98,15 @@
         <!-- /. nav side-->
         <div id="page-wrapper" >
             <div id="page-inner">
-                @foreach ($foods as $food)
+                @foreach ($food_text as $food)
                 <div class="row">
                     @if($loop->first)
                     <div class="col-md-6">
                         <br>
                         <h3><B>&nbsp;&nbsp;{{$food->food_title}}</B></h3>
                     </div>
+                    @endif
+                @endforeach
                     <div class="col-md-4 col-md-offset-2">
                         <br>
                         <a href="{{url ('user/food')}}" class="btn btn-success btn-lg" type="button"><span class="fa fa-arrow-left fa-2x"> กลับสู่หน้าหลัก</span></a>
@@ -112,9 +114,7 @@
                     <div class="col-md-12">
                         <hr>
                     </div>
-                    @endif
                 </div>
-                @endforeach
                 <br><br>
 
                 <div class="row">
@@ -156,11 +156,11 @@
                 </div>
 
                 <div class="row">
-                    @foreach ($foods as $food)
+                    @foreach ($food_text as $food)
                         @if ($loop->first) 
                             <div class="col-md-8 col-md-offset-2">
                                 <br>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <p>
                                 <?php $myStringWithANewLine ="$food->food_inform";
                                     $newString = str_replace("\r\n","<br />",$myStringWithANewLine);
                                     $newString = str_replace("\n\r","<br />",$newString);

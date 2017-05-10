@@ -101,7 +101,7 @@
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                @foreach ($foods as $food)
+                @foreach ($food_text as $food)
                     @if($loop->first)
                     <div class="col-md-8">
                         <br>
@@ -159,11 +159,11 @@
                 </div>
 
                 <div class="row">
-                    @foreach ($foods as $food)
+                    @foreach ($food_text as $food)
                         @if ($loop->first) 
                             <div class="col-md-8 col-md-offset-2">
                                 <br>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <p>
                                 <?php $myStringWithANewLine = "$food->food_inform";
                                     $newString = str_replace("\r\n","<br />",$myStringWithANewLine);
                                     $newString = str_replace("\n\r","<br />",$newString);
